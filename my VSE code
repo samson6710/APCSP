@@ -3,11 +3,9 @@ Pseudocode
 
 Samson Shi
 
-Define a Text structure:
-   text.description
+Define a Text structure: text.description
 
-Define an Image structure:
-   image.filename
+Define an Image structure: image.filename
 
 Function calculateSimilarity(text, image):
    For a real system, this would involve using a pretrained model.
@@ -25,25 +23,29 @@ Main function:
 #include <stdio.h>
 #include <string.h>
 
-// Define structures for images and text
+// Define a Text structure
 typedef struct {
     char description[100];
 } Text;
 
+// Define an Image structure
 typedef struct {
     char filename[100];
 } Image;
 
-// Function to calculate similarity score
+// Function to calculate similarity
 float calculateSimilarity(Text text, Image image) {
-    // In a real system, you'd use a proper visual-semantic embedding model here
-    // For simplicity, let's assume a random score between 0 and 1
-    float similarity = (float)rand() / RAND_MAX;
+    // For a real system, use a pretrained model to calculate similarity
+    // Let similarity be a float
+    // Calculate similarity between text and image
+    // Return similarity
+    float similarity; // Placeholder for similarity score
+    // Actual implementation with a pretrained model goes here
+    // ...
     return similarity;
 }
 
 int main() {
-    // Sample text and image
     Text text;
     strcpy(text.description, "A cat sitting on a table");
 

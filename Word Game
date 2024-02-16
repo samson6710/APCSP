@@ -1,0 +1,104 @@
+# Samson Shi
+# Start main_menu function to display the game menu with options: Instructions, Play Game, Scoreboard, Exit
+# If Instructions is selected, call display_instructions function to show how to play
+# If Play Game is selected, call play_game function:
+# Inside play_game, use select_word function to let user choose a word length and select a random word
+# Give the user n-1 chances to guess the word, where n is the length of the word
+# Allow guesses for one letter or the entire word
+# If a letter is guessed, reveal its positions
+# If the word is guessed, congratulate and prompt for name, then save the score
+# If incorrect, reduce chances and provide feedback
+# If chances run out, reveal the word and return to the main menu
+# If Scoreboard is selected, call display_scores function to read and sort scores from a file, then display
+# If Exit is selected, terminate the program
+# Use a file "scores.txt" to store and retrieve player scores
+
+import random
+
+# Show game instructions.
+def display_instructions():
+    print("Instructions:")
+    print("Guess the word correctly with n-1 opportunities, where n is the word's length.")
+    print("You can guess one letter at a time or the whole word at once.")
+
+# Allow user to choose word length and select a random word.
+def select_word():
+    word_lists = {
+        2: ["an", "as", "at"],
+        3: ["cat", "dog", "bat"],
+        4: ["tree", "wolf", "bear"]
+    }
+    print("Choose word length: 2, 3, 4")
+    length = int(input())
+    return random.choice(word_lists[length])
+
+# Main gameplay function.
+def play_game():
+    word = select_word()
+    chances = len(word) - 1
+    display_word = ["_"] * len(word)
+    print("Guess the word: " + " ".join(display_word))
+    
+    while chances > 0:
+        guess = input("Your guess: ")
+        if len(guess) == 1:  # Guessing a letter
+            if guess in word:
+                for i, letter in enumerate(word):
+                    if letter == guess:
+                        display_word[i] = guess
+                print("Correct: " + " ".join(display_word))
+            else:
+                print("Incorrect.")
+            chances -= 1
+        elif guess == word:  # Guessing the whole word
+            print("Congratulations! You've guessed the word.")
+            save_score(len(word))
+            return
+        else:
+            print("Incorrect guess.")
+            chances -= 1
+        
+    print(f"Out of chances! The word was {word}.")
+
+# Save the player's score.
+def save_score(score):
+    name = input("Enter your name: ")
+    with open("scores.txt", "a") as file:
+        file.write(f"{name}: {score}\n")
+
+# Display sorted scores from highest to lowest.
+def display_scores():
+    try:
+        with open("scores.txt", "r") as file:
+            scores = [line.strip().split(": ") for line in file.readlines()]
+            scores.sort(key=lambda x: int(x[1]), reverse=True)
+            print("Scores:")
+            for score in scores:
+                print(f"{score[0]}: {score[1]}")
+    except FileNotFoundError:
+        print("Scoreboard is empty.")
+
+# Display the main menu and handle user selections.
+def main_menu():
+    while True:
+        print("\nMain Menu:")
+        print("1. Instructions")
+        print("2. Play Game")
+        print("3. Scoreboard")
+        print("4. Exit")
+        choice = input("Select an option: ")
+        
+        if choice == "1":
+            display_instructions()
+        elif choice == "2":
+            play_game()
+        elif choice == "3":
+            display_scores()
+        elif choice == "4":
+            print("Exiting game.")
+            break
+        else:
+            print("Invalid selection. Please try again.")
+
+if __name__ == "__main__":
+    main_menu()

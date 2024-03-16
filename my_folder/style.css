@@ -1,0 +1,57 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Improved line spacing for readability */
+}
+
+header {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    padding-top: 10px; /* Added padding-top for a bit of space under the header */
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px; /* Padding for a better clickable area and spacing */
+    border-radius: 5px; /* Optional: Adds a subtle rounded corner to links */
+}
+
+nav ul li a:hover {
+    background-color: #0056b3; /* Optional: Hover effect for links */
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+p {
+    margin-bottom: 1em; /* Adds margin to paragraphs for better text block separation */
+}
